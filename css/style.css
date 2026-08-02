@@ -546,15 +546,20 @@ p {
 
 .project-gallery figure {
   margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .project-gallery .placeholder-frame {
   aspect-ratio: 3 / 2;
+  width: 100%;
 }
 
 .project-gallery img {
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 72vh;
 }
 
 .project-gallery figcaption {
