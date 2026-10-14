@@ -382,17 +382,13 @@ p {
 
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1.5rem, 3vw, 3rem) clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1rem, 2vw, 1.75rem);
   padding-bottom: clamp(4rem, 10vh, 7rem);
 }
 
 .work-card {
   display: block;
-}
-
-.work-card:nth-child(3n+1) {
-  grid-column: 1 / -1;
 }
 
 .work-card__frame {
@@ -403,10 +399,6 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.work-card:nth-child(3n+1) .work-card__frame {
-  aspect-ratio: 16 / 9;
 }
 
 .work-card__frame img {
@@ -455,7 +447,7 @@ p {
 }
 
 .work-card__title {
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   letter-spacing: -0.01em;
 }
 
@@ -472,17 +464,15 @@ p {
   margin-top: 0.35rem;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
   .work-grid {
     grid-template-columns: 1fr;
-  }
-
-  .work-card:nth-child(3n+1) {
-    grid-column: auto;
-  }
-
-  .work-card:nth-child(3n+1) .work-card__frame {
-    aspect-ratio: 4 / 3;
   }
 }
 
@@ -537,35 +527,13 @@ p {
 }
 
 .project-gallery {
-  padding-top: clamp(3rem, 8vh, 5rem);
-  padding-bottom: clamp(3rem, 8vh, 5rem);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.5rem, 4vw, 3rem);
-}
-
-.project-gallery figure {
-  margin: 0;
-  display: flex;
-  justify-content: center;
+  padding-top: clamp(2rem, 5vh, 3rem);
+  padding-bottom: clamp(2rem, 5vh, 3rem);
 }
 
 .project-gallery .placeholder-frame {
   aspect-ratio: 3 / 2;
   width: 100%;
-}
-
-.project-gallery img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 72vh;
-}
-
-.project-gallery figcaption {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
 }
 
 .project-nav {
@@ -696,124 +664,117 @@ p {
 }
 
 /* ==========================================================================
-   Grouped project galleries
+   Project galleries: compact, uniform tiles
+   Each tile is a fixed-ratio frame; the image sits inside it at its true
+   proportions (never stretched) and opens full size on click.
    ========================================================================== */
 
 .gallery-group {
-  padding-top: clamp(2.5rem, 6vh, 4rem);
-}
-
-.gallery-group:last-of-type {
-  padding-bottom: clamp(2rem, 5vh, 3rem);
+  padding-top: clamp(2rem, 5vh, 3rem);
 }
 
 .gallery-group__title {
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  letter-spacing: -0.01em;
-  padding-bottom: 0.75rem;
-  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  letter-spacing: -0.005em;
+  padding-bottom: 0.6rem;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
   border-bottom: 1px solid var(--color-border);
 }
 
 .gallery {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.5rem, 4vw, 3rem);
-}
-
-.gallery--grid,
-.gallery--grid3 {
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
   align-items: start;
 }
 
-.gallery--grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.gallery--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.gallery--grid3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.gallery__wide {
-  grid-column: 1 / -1;
+.gallery--single {
+  grid-template-columns: minmax(0, 560px);
 }
 
 @media (max-width: 900px) {
-  .gallery--grid3 {
+  .gallery,
+  .gallery--4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery--single {
+    grid-template-columns: minmax(0, 560px);
   }
 }
 
-@media (max-width: 600px) {
-  .gallery--grid,
-  .gallery--grid3 {
+@media (max-width: 520px) {
+  .gallery,
+  .gallery--4 {
     grid-template-columns: 1fr;
   }
 }
 
 .gallery figure {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .gallery figure a {
   display: block;
-  max-width: 100%;
+  position: relative;
+  aspect-ratio: var(--tile-ratio, 4 / 3);
+  background: var(--color-bg-alt);
+  overflow: hidden;
 }
 
 .gallery figure a:focus-visible {
   outline: 2px solid var(--color-accent);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 .gallery img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 72vh;
-}
-
-.gallery--feature img {
-  max-width: min(100%, 960px);
-}
-
-.gallery--grid figure,
-.gallery--grid3 figure,
-.gallery--grid figure a,
-.gallery--grid3 figure a {
+  position: absolute;
+  inset: 0;
   width: 100%;
-}
-
-.gallery--grid img,
-.gallery--grid3 img {
-  width: 100%;
-  max-height: 70vh;
+  height: 100%;
   object-fit: contain;
+  padding: clamp(0.4rem, 1vw, 0.8rem);
+  box-sizing: border-box;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.gallery--board img {
-  max-width: min(100%, 560px);
-  max-height: none;
+.gallery figure a:hover img {
+  transform: scale(1.02);
+}
+
+/* Long, thin drawings (sections) run the full row at their natural shape. */
+.gallery__wide {
+  grid-column: 1 / -1;
+}
+
+.gallery .gallery__wide a {
+  aspect-ratio: auto;
+}
+
+.gallery .gallery__wide img {
+  position: static;
+  height: auto;
+}
+
+.gallery figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.gallery--video {
+  grid-template-columns: minmax(0, 720px);
 }
 
 .gallery--video video {
   display: block;
   width: 100%;
-  max-width: 1100px;
   height: auto;
   background: #000;
-}
-
-.gallery figcaption {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  text-align: center;
 }
 
 /* ==========================================================================
@@ -822,14 +783,6 @@ p {
 
 .work-grid--pair {
   padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
-}
-
-.work-grid--pair .work-card:nth-child(3n+1) {
-  grid-column: auto;
-}
-
-.work-grid--pair .work-card:nth-child(3n+1) .work-card__frame {
-  aspect-ratio: 4 / 3;
 }
 
 .work-folder {
