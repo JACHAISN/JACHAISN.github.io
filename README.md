@@ -1,6 +1,6 @@
 # Jachai Samson — Architecture Portfolio
 
-Source for [jachaisamson.github.io](https://jachaisamson.github.io/), a hand-coded, static
+Source for [jachaisn.github.io](https://jachaisn.github.io/), a hand-coded, static
 architecture portfolio (plain HTML/CSS/JS, no build step). It replaces the old Adobe Portfolio site.
 
 ## Structure
